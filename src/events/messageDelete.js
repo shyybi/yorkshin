@@ -20,13 +20,9 @@ module.exports = {
                 .setColor(0xf54242)
                 .setTitle("Deleted Message")
                 .addFields(
-                    { name: " ", value: " " },
                     { name: 'From user:', value: `${author}`, inline: true },
                     { name: 'In:', value: `#${msgChan}`, inline: true },
-                    { name: " ", value: " " },
-                    { name: " ", value: " " },
                     { name: 'Content', value: `${content}` },
-                    { name: " ", value: " " },
                 )
                 .setThumbnail("https://cdn.discordapp.com/avatars/"+message.author.id+"/"+message.author.avatar+".jpeg")
                 .setTimestamp()

@@ -42,7 +42,6 @@ fs.readdirSync('./src/commands/slash').forEach(async file => {
   console.log(`Loaded command: ${command.data.name}`);
 });
 
-// Register slash commands with Discord API
 client.once('ready', async () => {
   try {
     await client.application.commands.set(client.slashdatas);
@@ -52,7 +51,6 @@ client.once('ready', async () => {
   }
 });
 
-// Handle slash command interactions
 client.on('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return;
 

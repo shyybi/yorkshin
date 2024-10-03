@@ -22,14 +22,11 @@ module.exports = {
         .setColor(0xffe100)
         .setTitle("Updated Message")
         .addFields(
-          { name: " ", value: " " },
           { name: "From User:", value: `${author}`, inline: true },
           { name: "In :", value: `#${msgChan}`, inline: true },
           { name: " ", value: " " },
-          { name: " ", value: " " },
           { name: "Old Content", value: `${content}` },
           { name: "New Content", value: `${newContent}` },
-          { name: " ", value: " " }
         )
         .setThumbnail("https://cdn.discordapp.com/avatars/"+ oldMessage.author.id+"/"+ oldMessage.author.avatar+".jpeg")
         .setTimestamp()

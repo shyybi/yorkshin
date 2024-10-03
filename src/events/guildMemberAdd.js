@@ -1,22 +1,43 @@
-const { EmbedBuilder } = require('discord.js') 
+const { EmbedBuilder, ActionRowBuilder } = require('discord.js') 
 const fs = require('fs');
 const channel = fs.readFileSync('config/channels.json');
 const cconfig = JSON.parse(channel);
 const role = fs.readFileSync('config/roles.json');
 const rconfig = JSON.parse(role)
+const { ButtonBuilder } = require('discord.js')
 module.exports = {
     name: 'guildMemberAdd',
     once: false,
     execute(member, client) {
         const channel = member.guild.channels.cache.find(chnl => chnl.id === cconfig.welcome);
         console.log(channel)
+
+        const row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+                .setLabel('Reglement')
+                .setStyle(ButtonStyle.Link)
+                .setURL('https://discord.com/channels/1278191063265181716/1279915290750222338'),
+            new ButtonBuilder()
+                .setLabel('Informations')
+                .setStyle(ButtonStyle.Link)
+                .setURL('https://discord.com/channels/1278191063265181716/1288930086539628594'),
+            new ButtonBuilder()
+                .setLabel("Besoin d'aide")
+                .setStyle(ButtonStyle.Link)
+                .setURL('https://discord.com/channels/1278191063265181716/1288842550697787474')
+        );
+
+
         const welcome = new EmbedBuilder()
             .setColor('#ca5cdd')
             .setTitle('Oh un nouveau personnage fait son apparition')
             .setDescription(`Bienvenue sur York Shin ${member} !` )
             .setImage('https://cdn.discordapp.com/attachments/1035693937383452775/1169637329095377066/anime-welcome.png?ex=655620a6&is=6543aba6&hm=b3427b8d4390fba564962f79fb16449699987ec2aeb3bc30449ba15aedac6006&')
             
-        channel.send({ embeds: [welcome] });
+        
+        
+        
+            channel.send({ content:`:wave: **Bienvenue** ${member} sur **York Shin** `,embeds: [welcome], components: [row] }).catch(console.error);
 
         const roleId = rconfig.membre
         const roleAdd = member.roles.add(roleId).catch(console.error);

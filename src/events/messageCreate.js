@@ -1,9 +1,10 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
 const fs = require('fs');
-const channel = fs.readFileSync('config/channels.json');
-const cconfig = JSON.parse(channel);
-const role = fs.readFileSync('config/roles.json');
-const rconfig = JSON.parse(role)
+const channelData = fs.readFileSync('config/channels.json');
+const cconfig = JSON.parse(channelData);
+const roleData = fs.readFileSync('config/roles.json');
+const rconfig = JSON.parse(roleData);
+
 module.exports = {
     name: 'messageCreate',
     once: false,
@@ -17,34 +18,43 @@ module.exports = {
             const msgChan = message.channel.name;
             const logChann = message.guild.channels.cache.get(logId);
 
+            const row = new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setLabel('Reglement')
+                    .setStyle(ButtonStyle.Link)
+                    .setURL('https://discord.com/channels/1278191063265181716/1279915290750222338'),
+                new ButtonBuilder()
+                    .setLabel('Informations')
+                    .setStyle(ButtonStyle.Link)
+                    .setURL('https://discord.com/channels/1278191063265181716/1279915290750222338'),
+                new ButtonBuilder()
+                    .setLabel("Besoin d'aide")
+                    .setStyle(ButtonStyle.Link)
+                    .setURL('https://discord.com/channels/1278191063265181716/1279915290750222338')
+            );
+
             const logMsg = new EmbedBuilder()
                 .setColor(0x48f542)
                 .setTitle('Created Message')
                 .addFields(
-                    { name: " ", value: " " },
                     { name: 'From user:', value: `${author}`, inline: true },
                     { name: 'In:', value: `#${msgChan}`, inline: true },
-                    { name: " ", value: " " },
-                    { name: " ", value: " " },
-                    { name: 'Content', value: `${content}` },
-                    { name: " ", value: " " },
+                    { name: 'Content', value: `${content}` }
                 )
-                .setThumbnail("https://cdn.discordapp.com/avatars/"+message.author.id+"/"+message.author.avatar+".jpeg")
+                .setThumbnail(`https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.jpeg`)
                 .setTimestamp()
                 .setFooter({ text: `by ${userName}`, iconURL: `${userIcon}` });
 
-            if(message.author.id == "1177559796975669340") {
+            if (message.author.id == "1177559796975669340") {
                 return;
-            }
-            else {
+            } else {
                 if (logChann) {
-                    logChann.send({ embeds: [logMsg] }).catch(console.error);
+                    logChann.send({embeds: [logMsg], components: [row] }).catch(console.error);
                 } else {
                     console.error("logChann is undefined or null");
                 }
             }
         }
         CreateMsg();
-
     }
 };
