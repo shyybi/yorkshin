@@ -28,7 +28,15 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({ text: `by ${userName}`, iconURL: `${userIcon}` });
 
-            logChann.send({ embeds: [logMsg] });
+            if (message.author.id == "1288896526734594230") {
+                return;
+            } else {
+                if (logChann) {
+                    logChann.send({embeds: [logMsg], components: [row] }).catch(console.error);
+                } else {
+                    console.error("logChann is undefined or null");
+                }
+            }
         }
         deleteMsg();
     }

@@ -18,21 +18,6 @@ module.exports = {
             const msgChan = message.channel.name;
             const logChann = message.guild.channels.cache.get(logId);
 
-            const row = new ActionRowBuilder().addComponents(
-                new ButtonBuilder()
-                    .setLabel('Reglement')
-                    .setStyle(ButtonStyle.Link)
-                    .setURL('https://discord.com/channels/1278191063265181716/1279915290750222338'),
-                new ButtonBuilder()
-                    .setLabel('Informations')
-                    .setStyle(ButtonStyle.Link)
-                    .setURL('https://discord.com/channels/1278191063265181716/1279915290750222338'),
-                new ButtonBuilder()
-                    .setLabel("Besoin d'aide")
-                    .setStyle(ButtonStyle.Link)
-                    .setURL('https://discord.com/channels/1278191063265181716/1279915290750222338')
-            );
-
             const logMsg = new EmbedBuilder()
                 .setColor(0x48f542)
                 .setTitle('Created Message')
@@ -45,11 +30,11 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({ text: `by ${userName}`, iconURL: `${userIcon}` });
 
-            if (message.author.id == "1177559796975669340") {
+            if (message.author.id == "1288896526734594230") {
                 return;
             } else {
                 if (logChann) {
-                    logChann.send({embeds: [logMsg], components: [row] }).catch(console.error);
+                    logChann.send({embeds: [logMsg] }).catch(console.error);
                 } else {
                     console.error("logChann is undefined or null");
                 }
