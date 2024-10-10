@@ -1,10 +1,9 @@
-const { EmbedBuilder, ActionRowBuilder } = require('discord.js') 
+const { ActivityType, EmbedBuilder, AttachmentBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const fs = require('fs');
 const channel = fs.readFileSync('config/channels.json');
 const cconfig = JSON.parse(channel);
 const role = fs.readFileSync('config/roles.json');
 const rconfig = JSON.parse(role)
-const { ButtonBuilder } = require('discord.js')
 module.exports = {
     name: 'guildMemberAdd',
     once: false,
@@ -21,7 +20,7 @@ module.exports = {
                 .setLabel('Reglement')
                 .setStyle(ButtonStyle.Link)
                 .setURL('https://discord.com/channels/1278191063265181716/1279915290750222338')
-                .setEmoji(':book:'),
+                .setEmoji(':books:'),
             new ButtonBuilder()
                 .setLabel('Informations')
                 .setStyle(ButtonStyle.Link)
@@ -46,7 +45,7 @@ module.exports = {
             .setThumbnail(member.user.displayAvatarURL())
         
             channel.send({ content:`:wave: **Bienvenue** ${member} sur **York Shin** `,embeds: [welcome], components: [row] }).catch(console.error);
-            channel.send({content : [imageEmbed]}).catch(console.error);
+            channel.send({ content: imageEmbed }).catch(console.error);
 
         if (roleAdd) {
             logChann.send(`Role <**MEMBER**>.id=**${roleId}** added to <@${member.user.id}>`);
