@@ -20,17 +20,17 @@ module.exports = {
                 .setLabel('Reglement')
                 .setStyle(ButtonStyle.Link)
                 .setURL('https://discord.com/channels/1278191063265181716/1279915290750222338')
-                .setEmoji(':books:'),
+                .setEmoji('📚'),
             new ButtonBuilder()
                 .setLabel('Informations')
                 .setStyle(ButtonStyle.Link)
                 .setURL('https://discord.com/channels/1278191063265181716/1288930086539628594')
-                .setEmoji(':books:'),
+                .setEmoji('📚'),
             new ButtonBuilder()
                 .setLabel("Besoin d'aide")
                 .setStyle(ButtonStyle.Link)
                 .setURL('https://discord.com/channels/1278191063265181716/1288842550697787474')
-                .setEmoji(':hand_splayed:')
+                .setEmoji('🖐️')
         );
 
         member.send({
